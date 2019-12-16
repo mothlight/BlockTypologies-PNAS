@@ -180,7 +180,7 @@ In the urban age, where the majority of the world's population live in cities, i
 
 
 
-Poorly managed urbanisation can impact urban residents through increased air pollution\cite{Stevenson2016,Sallis2016,Landrigan2017}, urban heat\cite{Coutts2012,Bowler2010}, urban sprawl\cite{Frank2000,Bettencourt2010}, and social isolation\cite{Vlahov2002}. In contrast, well managed urbanisation can promote economic activities and innovation, increase employment opportunities with economies of scale reducing the need for sprawling infrastructure\cite{Kuhnert2006,Bettencourt2007,Lobo2013}. For sustainable future cities, managing urbanisation processes so that they minimise the negative externalities and maximise the liveability, prosperity, and resilience of a city requires data and knowledge about how cities work. What is urgently needed therefore, is a systematic approach to compare cities that is a systematic method to identify different neighbourhoods within a city and to perform intra-city comparisons\cite{Louf2014a} to provide insights into i) the performance of cities at precinct or neighbourhood scales with respect to elements such as air pollution, infrastructure and urban heat and ii) what urban morphologies are best suited to the growing urban challenges of the 21st Century. To address this need, our framework allows us to compare a single element, as small as neighbourhoods of cities, across the globe, and to discover the mix and spatial distribution of different neighbourhood types in cities. We refer to this as an individual city `fingerprint'.
+Poorly managed urbanisation can impact urban residents through increased air pollution\cite{Stevenson2016,Sallis2016,Landrigan2017}, urban heat\cite{Coutts2012,Bowler2010}, urban sprawl\cite{Frank2000,Bettencourt2010}, and social isolation\cite{Vlahov2002}. In contrast, well managed urbanisation can promote economic activities and innovation, increase employment opportunities with economies of scale reducing the need for sprawling infrastructure\cite{Kuhnert2006,Bettencourt2007,Lobo2013}. For sustainable future cities, managing urbanisation processes so that they minimise the negative externalities and maximise the liveability, prosperity, and resilience of a city requires data and knowledge about how cities work. What is urgently needed therefore, is an approach to compare cities that is a systematic method to identify different neighbourhoods within a city and to perform intra-city comparisons\cite{Louf2014a} to provide insights into i) the performance of cities at precinct or neighbourhood scales with respect to elements such as air pollution, infrastructure and urban heat and ii) what urban morphologies are best suited to the growing urban challenges of the 21st Century. To address this need, our framework allows us to compare a single element, as small as neighbourhoods of cities, across the globe, and to discover the mix and spatial distribution of different neighbourhood types in cities. We refer to this as an individual city `fingerprint'.
 
 To discover how different cities work, research has been conducted through a number of methods to categorise cities and analyse underlying processes. Building on recent advances in computing power, artificial intelligence, and the wide availability of urban imagery, approaches have been created to discover unique characteristics of cities and how cities function. Large numbers of geo-tagged photos have been used to detect patterns of urban usage and public perception of a number of areas' functional and social attributes\cite{Liu2016,Zhou2014a}. Place Pulse, a database of urban imagery using crowd-sourced classifications (including safety, beauty, and liveliness) has attempted to quantify perceptions of urban areas\cite{Dubey2016,Naik2014} and inequality\cite{Salesses2013}. Doersch\cite{Doersch2012} used a large number of geo-localised street level images to discover common visual features across a number of cities. Enabled by remote sensing data, night-time light data has been used to categorise cities into stages of urbanisation and levels of economic activities\cite{Zhang2013}. Urban characteristics (road geometry, building dimensions and heights, and vegetation heights) have also been used to classify cities into typologies of differing periods of historical design and urban planning (i.e. 19th Century, 1950s, 1970s, etc.)\cite{Hermosilla2014}. 
 
@@ -416,32 +416,32 @@ The maps provide a high-level abstraction of road (black) and public transport (
 
 \subsection*{Calculating block size, regularity, and colour counts}\label{methodscalc}
 
-Block size, regularity, and colour counts were calculated for each sampled image with Algorithm \ref{alg:floodfill}, using the Java 8 AWT toolkit\cite{Oracle2018}:
+Block size, regularity, and colour counts were calculated for each sampled image with Algorithm \ref{alg:floodfill}, using the Java 8 AWT toolkit\cite{Oracle2018}. Samples of size floodfills and regularity floodfills are shown in Figure \ref{fig:floodfilled}. Sample histograms used in the SOM are shown in Figure \ref{fig:mapsandHist}.
 
 \begin{algorithm}\captionsetup{labelfont={sc,bf}, labelsep=newline}
   \caption{Calculation of histograms of block sizes and regularity}
 \begin{algorithmic}
-\label{alg:floodfill}
-\State Using latitude of image sample, crop the image to represent 335$\times$335 meters
-\State Resize image back to 320$\times$320 pixels
+
+\State Using latitude of image sample, crop image to represent 335$\times$335 meters
+\State Resize image to 320$\times$320 pixels
 \State Start at top left point of image
 \While{White pixels are found}
   \State Floodfill area using boundaries of all non-white colours (i.e. black, green, blue, orange)
   \State Count pixel size of region
-  \State Construct the smallest bounding box of the cloud of points in the region using the Fast Convex Hull algorithm\cite{Javagl2017,GoogleArchive2011}
-  \State Use the difference of counted pixels between the bounding box size and the region size as measure of irregularity
+  \State Construct smallest bounding box of cloud of points in region using Fast Convex Hull algorithm\cite{Javagl2017,GoogleArchive2011}
+  \State Use difference of counted pixels between bounding box size and region size as measure of irregularity
   \State Add size and regularity counts to corresponding (pre-specified) histogram bin
   \State Locate next white pixel by iterating across rows and columns
 \EndWhile
-\State  Count percentage of blue, orange, green, black, and white pixels in each image
-\State  Combine the two size and regularity histograms along with colour counts into a single histogram vector to be used in the SOM
+\State  Calculate percentage of blue, orange, green, black, and white pixels
+\State  Combine size and regularity histograms along with colour counts into single histogram vector
 %\Return Histogram of region sizes and region regularity for a single image
-\end{algorithmic}
+\end{algorithmic}\label{alg:floodfill}
   \hspace*{\algorithmicindent} \textbf{Output:} Histogram of region sizes and region regularity for a single image
 \end{algorithm}
 
 
-Samples of size floodfills and regularity floodfills are shown in Figure \ref{fig:floodfilled}. Sample histograms used in the SOM are shown in Figure \ref{fig:mapsandHist}.
+
 
 \begin{figure}
 \centering
